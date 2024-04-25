@@ -179,8 +179,9 @@ Pair * firstMap(HashMap * map)
 
 Pair * nextMap(HashMap * map) 
 {
+
   
-  int posicion_nueva = map->current + 1;
+  int posicion_nueva = (map->current + 1);
   
 
   while(posicion_nueva < map->capacity)
