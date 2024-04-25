@@ -183,7 +183,7 @@ Pair * nextMap(HashMap * map)
 
   while(posicion < map->capacity)
   {
-    if(map->buckets[posicion] != NULL || map->buckets[posicion]->key != NULL) 
+    if(map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
     {
       map->current = posicion;
       return map->buckets[posicion];     
