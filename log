@@ -1,0 +1,10 @@
+Thu 25 Apr 2024 09:20:14 PM UTC: 
+ hashmap.c | 113 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 104 insertions(+), 9 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘insertMap’:
+hashmap.c:77:3: error: ‘else’ without a previous ‘if’
+   77 |   else
+      |   ^~~~
+Compilation failed
+e92871f
