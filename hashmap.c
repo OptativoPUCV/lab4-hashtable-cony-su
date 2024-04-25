@@ -87,7 +87,8 @@ void insertMap(HashMap * map, char * key, void * value)
   
 }
 
-void enlarge(HashMap * map) {
+void enlarge(HashMap * map) 
+{
     enlarge_called = 1; //no borrar (testing purposes)
 
 
@@ -178,24 +179,17 @@ Pair * firstMap(HashMap * map)
 }
 
 Pair * nextMap(HashMap * map) 
-{
-
-  
-  int posicion_nueva = (map->current + 1);
-  
+{  
+  int posicion_nueva = (map->current + 1); 
 
   while(posicion_nueva < map->capacity)
   {
-    
     if(map->buckets[posicion_nueva] != NULL && map->buckets[posicion_nueva]->key != NULL) 
-    {
-      
-      map->current = posicion_nueva;
-      
+    {  
+      map->current = posicion_nueva; 
       return map->buckets[posicion_nueva];     
     }
     posicion_nueva = (posicion_nueva + 1) % map->capacity;
-    
   }
   return NULL;
 
