@@ -142,7 +142,7 @@ Recuerde actualizar el índice current a la posición encontrada. Recuerde que e
 
 Pair * searchMap(HashMap * map,  char * key) 
 {   
-  /*int posicion = hash(key, map->capacity);
+  int posicion = hash(key, map->capacity);
 
   while(map->buckets[posicion] != NULL)
   {
@@ -153,7 +153,7 @@ Pair * searchMap(HashMap * map,  char * key)
     }
     posicion = (posicion + 1) % map->capacity;
   }
-  */
+  
   return NULL;
 }
 
