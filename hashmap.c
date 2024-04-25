@@ -64,7 +64,7 @@ void insertMap(HashMap * map, char * key, void * value)
     map->buckets[posicion] = nuevo_elem;
     map->size++;
   }
- // else if(strcmp(map->buckets[posicion]->key, key) == 0) map->buckets[posi];
+  else if(strcmp(map->buckets[posicion]->key, key) == 0) return;
 
   else
   {
@@ -184,7 +184,8 @@ Pair * nextMap(HashMap * map)
   while(posicion < map->capacity)
   {
      if(map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) return map->buckets[posicion];
+    posicion = (posicion + 1) % map->capacity;
   }
-  posicion = (posicion + 1) % map->capacity; 
+   
   return NULL;
 }
