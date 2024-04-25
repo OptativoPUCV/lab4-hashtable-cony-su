@@ -190,10 +190,12 @@ Pair * nextMap(HashMap * map)
     {
       
       map->current = posicion_nueva;
+      
       return map->buckets[posicion_nueva];     
     }
-      posicion_nueva = (posicion_nueva + 1) % map->capacity;
+    posicion_nueva = (posicion_nueva + 1) % map->capacity;
+    
   }
-   
   return NULL;
+
 }
