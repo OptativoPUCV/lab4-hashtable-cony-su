@@ -8,3 +8,9 @@ hashmap.c:77:3: error: ‘else’ without a previous ‘if’
       |   ^~~~
 Compilation failed
 e92871f
+Thu 25 Apr 2024 09:21:44 PM UTC: 
+ hashmap.c | 13 +++----------
+ 1 file changed, 3 insertions(+), 10 deletions(-)
+ tests:  2|5
+total_score: 20/70
+64b50d0
