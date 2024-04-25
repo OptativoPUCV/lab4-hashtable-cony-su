@@ -82,7 +82,9 @@ void insertMap(HashMap * map, char * key, void * value)
       else if(strcmp(map->buckets[posicion]->key, key) == 0) return;
       nueva_posicion = (nueva_posicion + 1) % map->capacity;
     }
+    
   }
+  
 }
 
 void enlarge(HashMap * map) {
@@ -110,7 +112,7 @@ HashMap * createMap(long capacity)
 
 void eraseMap(HashMap * map,  char * key) 
 {    
- /* int posicion = hash(key, map->capacity);
+  int posicion = hash(key, map->capacity);
 
   while(map->buckets[posicion] != NULL)
   {
@@ -123,7 +125,7 @@ void eraseMap(HashMap * map,  char * key)
     }
     posicion = (posicion + 1) % map->capacity;
   }
-  */
+  
 }
 
 /*
