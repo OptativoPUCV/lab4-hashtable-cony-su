@@ -179,16 +179,20 @@ Pair * firstMap(HashMap * map)
 
 Pair * nextMap(HashMap * map) 
 {
-  int posicion = map->current + 1;
+  
+  int posicion_nueva = map->current + 1;
+  
 
-  while(posicion < map->capacity)
+  while(posicion_nueva < map->capacity)
   {
-    if(map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
+    
+    if(map->buckets[posicion_nueva] != NULL && map->buckets[posicion_nueva]->key != NULL) 
     {
-      map->current = posicion;
-      return map->buckets[posicion];     
+      
+      map->current = posicion_nueva;
+      return map->buckets[posicion_nueva];     
     }
-    posicion = (posicion + 1) % map->capacity;
+      posicion_nueva = (posicion_nueva + 1) % map->capacity;
   }
    
   return NULL;
