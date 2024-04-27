@@ -54,28 +54,38 @@ c - Ingrese el par en la casilla que encontró.
 No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actualizar la variable size.
 */
 
-
-Pair *nextMap(HashMap *map) 
+void insertMap(HashMap *map, char *key, void *value) 
 {
-    if (map == NULL) {
-        return NULL;
+    if (map == NULL || key == NULL) {
+        return;
     }
 
-    long posicion = (map->current + 1) % map->capacity;
+    long posicion = hash(key, map->capacity);
+    long originalIndex = posicion;
 
-    for (long i = 0; i < map->capacity; i++) 
+    while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
     {
-        if (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
+        if (strcmp(map->buckets[posicion]->key, key) == 0) 
         {
+            map->buckets[posicion]->value = value;
             map->current = posicion;
-            return map->buckets[posicion];
+            return;
         }
+
         posicion = (posicion + 1) % map->capacity;
+        if (posicion == originalIndex) {
+            return; // Evitar bucle infinito si el mapa está lleno
+        }
     }
 
-    // Si se recorrió todo el mapa y no se encontró ningún par válido, devolvemos NULL
-    map->current = -1;
-    return NULL;
+    Pair *new_pair = createPair(key, value);
+    if (new_pair == NULL) {
+        return; // No se pudo crear el nuevo par
+    }
+
+    map->buckets[posicion] = new_pair;
+    map->size++;
+    map->current = posicion;
 }
 
 
@@ -201,26 +211,26 @@ Pair *firstMap(HashMap *map)
   return NULL;
 }
 
-Pair *nextMap(HashMap *map) {
-    if (map->size == 0) {
-        map->current = -1;
+
+Pair *nextMap(HashMap *map) 
+{
+    if (map == NULL) {
         return NULL;
     }
 
-    long start = (map->current + 1) % map->capacity;
-    long posicion = start;
-    int found = 0; // Variable para indicar si se ha encontrado un par válido
+    long posicion = (map->current + 1) % map->capacity;
 
-    while (posicion != start || !found) {
-        if (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) {
+    for (long i = 0; i < map->capacity; i++) 
+    {
+        if (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
+        {
             map->current = posicion;
-            found = 1; // Se ha encontrado un par válido
             return map->buckets[posicion];
         }
         posicion = (posicion + 1) % map->capacity;
     }
 
-    // Si se ha recorrido todo el mapa sin encontrar un par válido
+    // Si se recorrió todo el mapa y no se encontró ningún par válido, devolvemos NULL
     map->current = -1;
     return NULL;
 }
