@@ -154,23 +154,45 @@ HashMap * createMap(long capacity)
 
 /* Implemente la función void eraseMap(HashMap * map, char * key). Está función elimina el dato correspondiente a la clave key. Para hacerlo debe buscar el dato y luego marcarlo para que no sea válido. No elimine el par, sólo invalídelo asignando NULL a la clave (pair->key=NULL). Recuerde actualizar la variable size.*/ 
 
-void eraseMap(HashMap * map,  char * key) 
+void eraseMap(HashMap * map,  char * key)
 {    
-  long posicion = hash(key, map->capacity);
+  Pair * elem = searchMap(map, key);
 
-  while(map->buckets[posicion] != NULL)
-  {
-    if(strcmp(map->buckets[posicion]->key, key) == 0)
-    { 
-      map->buckets[posicion]->key = NULL;
-      map->size--;
-      return;
-    }
-    posicion = (posicion + 1) % map->capacity;
-  }
-  
+  if (elem == NULL)
+    return;
+
+  elem->key = NULL;
+  elem->value = NULL;
+  map->size = map->size - 1;
 }
 
+Pair * searchMap(HashMap * map,  char * key)
+{   
+  if (map == NULL || key == NULL)
+    return NULL;
+
+  long posicion = hash(key, map->capacity);
+
+  if (map->buckets[posicion] == NULL || map->buckets[posicion]->key == NULL)
+  {
+    return NULL;
+  }
+
+  else
+  {
+    while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL)
+    {
+      if (is_equal(map->buckets[posicion]->key, key) == 1)
+      {
+        map->current = posicion;
+        return map->buckets[posicion];
+      }
+
+      posicion = (posicion + 1) % map->capacity;
+    }
+    return NULL;
+  }
+}
 /*
 3.- Implemente la función Pair * searchMap(HashMap * map, char * key), la cual retorna el Pair asociado a la clave ingresada. Recuerde que para buscar el par debe:
 
@@ -183,29 +205,6 @@ c - Si llega a una casilla nula, retorne NULL inmediatamente (no siga avanzando,
 Recuerde actualizar el índice current a la posición encontrada. Recuerde que el arreglo es circular.
 */
 
-Pair *searchMap(HashMap *map, char *key)
-{
-  long posicion = hash(key, map->capacity);
-  long originalIndex = posicion;
-
-  while (map->buckets[posicion] != NULL)
-  {
-    if (strcmp(map->buckets[posicion]->key, key) == 0) 
-    {
-      map->current = posicion;
-      return map->buckets[posicion];
-    }
-    posicion = (posicion + 1) % map->capacity;
-
-    // Se ha recorrido todo el mapa sin encontrar la clave
-    if (posicion == originalIndex) 
-    {
-      return NULL;
-    }
-  }
-
-  return NULL;
-}
 
 /*
  Implemente las funciones para recorrer la estructura: Pair * firstMap(HashMap * map) retorna el primer Pair válido del arreglo buckets. Pair * nextMap(HashMap * map) retorna el siguiente Pair del arreglo buckets a partir índice current. Recuerde actualizar el índice.
