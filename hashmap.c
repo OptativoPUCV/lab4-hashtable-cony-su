@@ -56,6 +56,10 @@ No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actua
 
 void insertMap(HashMap *map, char *key, void *value) 
 {
+    if (map == NULL || key == NULL) {
+        return;
+    }
+
     long posicion = hash(key, map->capacity);
     long originalIndex = posicion;
 
@@ -63,29 +67,25 @@ void insertMap(HashMap *map, char *key, void *value)
     {
         if (strcmp(map->buckets[posicion]->key, key) == 0) 
         {
-          map->buckets[posicion]->value = value;
-          map->current = posicion;
-          return;
+            map->buckets[posicion]->value = value;
+            map->current = posicion;
+            return;
         }
-      
+
         posicion = (posicion + 1) % map->capacity;
-        if (posicion == originalIndex) return;
+        if (posicion == originalIndex) {
+            return; // Evitar bucle infinito si el mapa está lleno
+        }
     }
 
-    if (map->buckets[posicion] == NULL) 
-    {
-      Pair *nuevo_elem = createPair(key, value);
-      map->buckets[posicion] = nuevo_elem;
-      map->size++;
-      map->current = posicion;
-    } 
-    else 
-    {
-      Pair *nuevo_elem = createPair(key, value);
-      map->buckets[posicion] = nuevo_elem;
-      map->size++;
-      map->current = posicion;
+    Pair *new_pair = createPair(key, value);
+    if (new_pair == NULL) {
+        return; // No se pudo crear el nuevo par
     }
+
+    map->buckets[posicion] = new_pair;
+    map->size++;
+    map->current = posicion;
 }
 
 
