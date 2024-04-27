@@ -531,3 +531,14 @@ hashmap.c:105:6: note: previous definition of ‘enlarge’ with type ‘void(Ha
 cc1: all warnings being treated as errors
 Compilation failed
 5a43c82
+Sat 27 Apr 2024 04:44:52 AM UTC: 
+ hashmap.c | 18 ------------------
+ 1 file changed, 18 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘insertMap’:
+hashmap.c:61:8: error: unused variable ‘pos’ [-Werror=unused-variable]
+   61 |   long pos = posicion;
+      |        ^~~
+cc1: all warnings being treated as errors
+Compilation failed
+3c62927
