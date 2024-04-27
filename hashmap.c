@@ -58,28 +58,26 @@ No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actua
 void insertMap(HashMap * map, char * key, void * value) 
 {
   long posicion = hash(key, map->capacity);
-  long pos = posicion;
+  long originalPos = posicion;
 
-  while(posicion < map->capacity)
+  while (posicion != originalPos || map->buckets[posicion] != NULL)
   {
-    if(map->buckets[posicion] == NULL && map->buckets[posicion]->key != NULL)
+    if (map->buckets[posicion] == NULL || map->buckets[posicion]->key == NULL)
     {
       Pair * nuevo_elem = createPair(key, value);
       map->buckets[posicion] = nuevo_elem;
-     // map->current = posicion;
       map->size++;
       return;
     }
 
-    if(strcmp(map->buckets[posicion]->key, key) == 0)
+    if (strcmp(map->buckets[posicion]->key, key) == 0)
     {
       map->buckets[posicion]->value = value;
       return;
     }
+
     posicion = (posicion + 1) % map->capacity;
   }
-
-  return;
 
 }
 
@@ -99,10 +97,6 @@ d - Inicialice size a 0.
 
 e - Inserte los elementos del arreglo old_buckets en el mapa (use la función insertMap que ya implementó).
 */
-
-
-
-
 
 
 void enlarge(HashMap *map) 
@@ -185,15 +179,15 @@ Pair *searchMap(HashMap *map, char *key)
       return map->buckets[posicion];
     }
     posicion = (posicion + 1) % map->capacity;
+
+    // Se ha recorrido todo el mapa sin encontrar la clave
     if (posicion == originalIndex) 
     {
-            // Se ha recorrido todo el mapa sin encontrar la clave
       return NULL;
     }
-    
   }
 
-    return NULL;
+  return NULL;
 }
 
 /*
