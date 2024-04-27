@@ -392,3 +392,13 @@ hashmap.c:115:1: error: "/*" within comment [-Werror=comment]
 cc1: all warnings being treated as errors
 Compilation failed
 740bb93
+Sat 27 Apr 2024 04:25:55 AM UTC: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+In file included from test.c:4:
+hashmap.c:111:1: error: "/*" within comment [-Werror=comment]
+  111 | /*
+      |  
+cc1: all warnings being treated as errors
+Compilation failed
+e955cff

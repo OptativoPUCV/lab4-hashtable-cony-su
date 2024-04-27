@@ -112,7 +112,7 @@ No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actua
 
 
 
-/*
+
 Implemente la función void enlarge(HashMap * map). Esta función agranda la capacidad del arreglo buckets y reubica todos sus elementos. Para hacerlo es recomendable mantener referenciado el arreglo actual/antiguo de la tabla con un puntero auxiliar. Luego, los valores de la tabla se reinicializan con un nuevo arreglo con el doble de capacidad. Por último los elementos del arreglo antiguo se insertan en el mapa vacío con el método insertMap. Puede seguir los siguientes pasos:
 
 a - Cree una variable auxiliar de tipo Pair** para matener el arreglo map->buckets (old_buckets);
