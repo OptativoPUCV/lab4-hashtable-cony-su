@@ -211,25 +211,26 @@ Pair *firstMap(HashMap *map)
   return NULL;
 }
 
-Pair *nextMap(HashMap *map) 
-{
-  if (map->size == 0) {
+Pair *nextMap(HashMap *map) {
+    if (map->size == 0) {
+        map->current = -1;
+        return NULL;
+    }
+
+    long start = (map->current + 1) % map->capacity;
+    long posicion = start;
+    int found = 0; // Variable para indicar si se ha encontrado un par válido
+
+    while (posicion != start || !found) {
+        if (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) {
+            map->current = posicion;
+            found = 1; // Se ha encontrado un par válido
+            return map->buckets[posicion];
+        }
+        posicion = (posicion + 1) % map->capacity;
+    }
+
+    // Si se ha recorrido todo el mapa sin encontrar un par válido
     map->current = -1;
     return NULL;
-  }
-
-  long startPosition = (map->current + 1) % map->capacity;
-  long currentPosition = startPosition;
-
-  while (currentPosition != map->current) {
-    if (map->buckets[currentPosition] != NULL && map->buckets[currentPosition]->key != NULL) {
-      map->current = currentPosition;
-      return map->buckets[currentPosition];
-    }
-    currentPosition = (currentPosition + 1) % map->capacity;
-  }
-
-  // Si llegamos aquí, no se encontró ningún elemento válido después del índice actual
-  map->current = -1;
-  return NULL;
 }
