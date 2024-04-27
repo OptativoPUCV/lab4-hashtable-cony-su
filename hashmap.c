@@ -175,7 +175,8 @@ Pair * nextMap(HashMap * map)
 {  
   int posicion_nueva = (map->current + 1) % map->capacity; 
 
-  while(posicion_nueva < map->capacity)
+  
+  while(posicion_nueva != map->current)
   {
     if(map->buckets[posicion_nueva] != NULL && map->buckets[posicion_nueva]->key != NULL) 
     {  
