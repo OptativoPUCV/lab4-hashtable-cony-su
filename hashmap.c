@@ -42,6 +42,32 @@ int is_equal(void* key1, void* key2)
     return 0;
 }
 
+void insertMap(HashMap *map, char *key, void *value)
+{
+  long posicion = hash(key, map->capacity);
+  long originalIndex = posicion;
+
+  while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
+  {
+    if (strcmp(map->buckets[posicion]->key, key) == 0) 
+    {
+      map->buckets[posicion]->value = value;
+      map->current = posicion;
+      return;
+    }
+    posicion = (posicion + 1) % map->capacity;
+    if (posicion == originalIndex) 
+    {
+      return;
+    }
+  }
+
+    // Insertar el nuevo par en la casilla encontrada
+  map->buckets[posicion] = createPair(key, value);
+  map->size++;
+  map->current = posicion;
+}
+
 /*
  Implemente la función void insertMap(HashMap * map, char * key, void * value). Esta función inserta un nuevo dato (key,value) en el mapa y actualiza el índice current a esa posición. Recuerde que para insertar un par (clave,valor) debe:
 
@@ -55,13 +81,14 @@ No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actua
 */
 
 
-void insertMap(HashMap * map, char * key, void * value) 
+/*void insertMap(HashMap * map, char * key, void * value) 
 {
   long posicion = hash(key, map->capacity);
+  long pos = posicion;
 
   while(posicion < map->capacity)
   {
-    if(map->buckets[posicion] == NULL || map->buckets[posicion]->key == 0)
+    if(map->buckets[posicion] == NULL && map->buckets[posicion]->key != NULL)
     {
       Pair * nuevo_elem = createPair(key, value);
       map->buckets[posicion] = nuevo_elem;
@@ -81,6 +108,9 @@ void insertMap(HashMap * map, char * key, void * value)
   return;
 
 }
+/*
+
+
 
 /*
 Implemente la función void enlarge(HashMap * map). Esta función agranda la capacidad del arreglo buckets y reubica todos sus elementos. Para hacerlo es recomendable mantener referenciado el arreglo actual/antiguo de la tabla con un puntero auxiliar. Luego, los valores de la tabla se reinicializan con un nuevo arreglo con el doble de capacidad. Por último los elementos del arreglo antiguo se insertan en el mapa vacío con el método insertMap. Puede seguir los siguientes pasos:

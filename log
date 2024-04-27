@@ -379,3 +379,16 @@ Sat 27 Apr 2024 04:07:13 AM UTC:
  tests:  16|1
 total_score: 60/70
 b8ca241
+Sat 27 Apr 2024 04:25:41 AM UTC: 
+ hashmap.c | 34 ++++++++++++++++++++++++++++++++--
+ 1 file changed, 32 insertions(+), 2 deletions(-)
+In file included from test.c:4:
+hashmap.c:111:1: error: "/*" within comment [-Werror=comment]
+  111 | /*
+      |  
+hashmap.c:115:1: error: "/*" within comment [-Werror=comment]
+  115 | /*
+      |  
+cc1: all warnings being treated as errors
+Compilation failed
+740bb93
