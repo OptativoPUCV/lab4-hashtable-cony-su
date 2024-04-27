@@ -217,6 +217,6 @@ Pair * nextMap(HashMap * map)
     posicion = (posicion + 1) % map->capacity;
 
   }
-  map->current = -1;
+  map->current = NULL;
   return NULL;
 }
