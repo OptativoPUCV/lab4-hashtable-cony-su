@@ -82,7 +82,7 @@ void insertMap(HashMap *map, char *key, void *value)
 
     map->buckets[posicion] = new_pair;
     map->size++;
-    map->current = posicion;
+  //  map->current = posicion;
 }
 
 
@@ -145,15 +145,14 @@ void eraseMap(HashMap * map,  char * key)
   while(map->buckets[posicion] != NULL)
   {
     if(strcmp(map->buckets[posicion]->key, key) == 0)
-    {
-      free(map->buckets[posicion]->key);
+    { 
       map->buckets[posicion]->key = NULL;
       map->size--;
       return;
     }
     posicion = (posicion + 1) % map->capacity;
   }
-
+  
 }
 
 /*
