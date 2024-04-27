@@ -227,3 +227,14 @@ hashmap.c:58:6: note: declared here
 cc1: all warnings being treated as errors
 Compilation failed
 3d6e321
+Sat 27 Apr 2024 01:47:02 AM UTC: 
+ hashmap.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘insertMap’:
+hashmap.c:79:16: error: assignment to ‘long int’ from ‘void *’ makes integer from pointer without a cast [-Werror=int-conversion]
+   79 |   map->current = NULL;
+      |                ^
+cc1: all warnings being treated as errors
+Compilation failed
+c1ed269
