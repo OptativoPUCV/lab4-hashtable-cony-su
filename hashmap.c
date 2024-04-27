@@ -207,11 +207,7 @@ Pair *firstMap(HashMap *map)
   return NULL;
 }
 
-
-
-
-
-
+//esta funcion no vuelve al comienzo, llega al final y termina, por eso "posicion = (posicion + 1);"
 Pair * nextMap(HashMap * map) 
 {
   if (map == NULL) 
