@@ -204,7 +204,7 @@ Pair * firstMap(HashMap * map)
 Pair * nextMap(HashMap * map) 
 {
   if(map->size == 0) return NULL;
-  int posicion = map->current + 1;
+  int posicion = (map->current + 1);
   
   while(posicion < map->capacity)
   {
@@ -217,6 +217,6 @@ Pair * nextMap(HashMap * map)
     posicion = (posicion + 1) % map->capacity;
 
   }
-  map->current = NULL;
+  map->current = -1;
   return NULL;
 }
