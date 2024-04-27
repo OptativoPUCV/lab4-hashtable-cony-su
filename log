@@ -262,3 +262,25 @@ Sat 27 Apr 2024 01:54:14 AM UTC:
  tests:  15|2
 total_score: 50/70
 14998b7
+Sat 27 Apr 2024 01:56:06 AM UTC: 
+ hashmap.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘enlarge’:
+hashmap.c:103:4: error: expected expression before ‘Pair’
+  103 |   *Pair** old_buckets = map->buckets;
+      |    ^~~~
+hashmap.c:106:27: error: too few arguments to function ‘calloc’
+  106 |   map->buckets = (Pair**) calloc(sizeof(Pair*) * map->capacity);
+      |                           ^~~~~~
+In file included from test.c:2:
+/nix/store/4pqv2mwdn88h7xvsm7a5zplrd8sxzvw0-glibc-2.35-163-dev/include/stdlib.h:543:14: note: declared here
+  543 | extern void *calloc (size_t __nmemb, size_t __size)
+      |              ^~~~~~
+In file included from test.c:4:
+hashmap.c:110:8: error: ‘old_buckets’ undeclared (first use in this function)
+  110 |     if(old_buckets[k] != NULL)
+      |        ^~~~~~~~~~~
+hashmap.c:110:8: note: each undeclared identifier is reported only once for each function it appears in
+Compilation failed
+03594a6
