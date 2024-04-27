@@ -54,49 +54,36 @@ c - Ingrese el par en la casilla que encontró.
 No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actualizar la variable size.
 */
 
-
-void insertMap(HashMap * map, char * key, void * value)
+void insertMap(HashMap *map, char *key, void *value) 
 {
-  if (map == NULL || key == NULL)
-    return;
-
-  /*if ((map->size + 1) >= (map->capacity * 0.7))
-    enlarge(map);*/
-
-  long posicion = hash(key, map->capacity);
-  Pair * pair = searchMap(map, key);
-
-  if (pair == NULL)
-  {
-    while (posicion < map->capacity)
-    {
-      if (map->buckets[posicion] == NULL)
-      {
-        map->buckets[posicion] = createPair(key, value);
-        map->current = posicion;
-        map->size = map->size + 1;
+    if (map == NULL || key == NULL) {
         return;
-      }
-      posicion = (posicion + 1) % map->capacity;
     }
-  }
 
-  else
-  {
-    pair->value = value;
+    long posicion = hash(key, map->capacity);
+    long originalIndex = posicion;
 
-    while (posicion < map->capacity)
+    while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
     {
-      if (is_equal(pair->key, key) == 1)
-        break;
+        if (strcmp(map->buckets[posicion]->key, key) == 0) 
+        {
+            map->buckets[posicion]->value = value;
+           // map->current = posicion;
+            return;
+        }
 
-      posicion = (posicion + 1) % map->capacity;
+        posicion = (posicion + 1) % map->capacity;
+        if (posicion == originalIndex) return; 
+
     }
-    map->current = posicion;
-    return;
-  }
-}
 
+    Pair *new_pair = createPair(key, value);
+    if (new_pair == NULL) return; 
+
+    map->buckets[posicion] = new_pair;
+    map->size++;
+  //  map->current = posicion;
+}
 
 /*Implemente la función void enlarge(HashMap * map). Esta función agranda la capacidad del arreglo buckets y reubica todos sus elementos. Para hacerlo es recomendable mantener referenciado el arreglo actual/antiguo de la tabla con un puntero auxiliar. Luego, los valores de la tabla se reinicializan con un nuevo arreglo con el doble de capacidad. Por último los elementos del arreglo antiguo se insertan en el mapa vacío con el método insertMap. Puede seguir los siguientes pasos:
 
