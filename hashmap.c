@@ -186,22 +186,29 @@ HashMap * createMap(long capacity)
 
 /* Implemente la función void eraseMap(HashMap * map, char * key). Está función elimina el dato correspondiente a la clave key. Para hacerlo debe buscar el dato y luego marcarlo para que no sea válido. No elimine el par, sólo invalídelo asignando NULL a la clave (pair->key=NULL). Recuerde actualizar la variable size.*/ 
 
-void eraseMap(HashMap * map,  char * key) 
-{    
+void eraseMap(HashMap *map, char *key) 
+{
   long posicion = hash(key, map->capacity);
+  long originalIndex = posicion;
 
-  while(map->buckets[posicion] != NULL)
+  while (map->buckets[posicion] != NULL) 
   {
-    if(strcmp(map->buckets[posicion]->key, key) == 0)
+    if (strcmp(map->buckets[posicion]->key, key) == 0) 
     {
-      //free(map->buckets[posicion]->key);
-      map->buckets[posicion]->key = NULL;
+      free(map->buckets[posicion]->key);
+      free(map->buckets[posicion]->value);
+      free(map->buckets[posicion]);
+      map->buckets[posicion] = NULL;
       map->size--;
       return;
     }
     posicion = (posicion + 1) % map->capacity;
+    if (posicion == originalIndex) 
+    {
+            // Se ha recorrido todo el mapa sin encontrar la clave
+      return;
+    }
   }
-  
 }
 
 /*
