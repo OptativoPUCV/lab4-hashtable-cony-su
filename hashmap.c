@@ -115,8 +115,6 @@ void enlarge(HashMap * map)
     }
   }
   free(old_buckets);
-  
-
 }
 
 //Esta función crea una variable de tipo HashMap, inicializa el arreglo de buckets con casillas nulas, inicializa el resto de variables y retorna el mapa. Inicialice el índice current a -1.
@@ -219,5 +217,6 @@ Pair * nextMap(HashMap * map)
     posicion = (posicion + 1) % map->capacity;
 
   }
+  map->current = -1;
   return NULL;
 }
