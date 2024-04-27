@@ -218,11 +218,15 @@ Pair *nextMap(HashMap *map) {
         return NULL;
     }
 
-    long posicion = (map->current + 1) % map->capacity;
+    long start = (map->current + 1) % map->capacity;
+    long posicion = start;
 
-    while (posicion != map->current) {
+    int found = 0; // Variable para indicar si se ha encontrado un par válido
+
+    while (posicion != start || !found) {
         if (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) {
             map->current = posicion;
+            found = 1; // Se ha encontrado un par válido
             return map->buckets[posicion];
         }
         posicion = (posicion + 1) % map->capacity;
