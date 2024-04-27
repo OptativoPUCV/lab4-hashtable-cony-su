@@ -42,32 +42,6 @@ int is_equal(void* key1, void* key2)
     return 0;
 }
 
-void insertMap(HashMap *map, char *key, void *value)
-{
-  long posicion = hash(key, map->capacity);
-  long originalIndex = posicion;
-
-  while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
-  {
-    if (strcmp(map->buckets[posicion]->key, key) == 0) 
-    {
-      map->buckets[posicion]->value = value;
-      map->current = posicion;
-      return;
-    }
-    posicion = (posicion + 1) % map->capacity;
-    if (posicion == originalIndex) 
-    {
-      return;
-    }
-  }
-
-    // Insertar el nuevo par en la casilla encontrada
-  map->buckets[posicion] = createPair(key, value);
-  map->size++;
-  map->current = posicion;
-}
-
 /*
  Implemente la función void insertMap(HashMap * map, char * key, void * value). Esta función inserta un nuevo dato (key,value) en el mapa y actualiza el índice current a esa posición. Recuerde que para insertar un par (clave,valor) debe:
 
@@ -81,7 +55,7 @@ No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actua
 */
 
 
-/*void insertMap(HashMap * map, char * key, void * value) 
+void insertMap(HashMap * map, char * key, void * value) 
 {
   long posicion = hash(key, map->capacity);
   long pos = posicion;
