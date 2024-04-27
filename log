@@ -615,3 +615,9 @@ hashmap.c:60:8: error: unused variable ‘pos’ [-Werror=unused-variable]
 cc1: all warnings being treated as errors
 Compilation failed
 dc727ce
+Sat 27 Apr 2024 05:07:49 AM UTC: 
+ hashmap.c | 42 +++++++++++++++++++++++-------------------
+ 1 file changed, 23 insertions(+), 19 deletions(-)
+ tests:  16|1
+total_score: 60/70
+69dc1ed
