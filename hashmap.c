@@ -216,21 +216,28 @@ c - Si llega a una casilla nula, retorne NULL inmediatamente (no siga avanzando,
 Recuerde actualizar el índice current a la posición encontrada. Recuerde que el arreglo es circular.
 */
 
-Pair * searchMap(HashMap * map,  char * key) 
-{   
+Pair *searchMap(HashMap *map, char *key)
+{
   long posicion = hash(key, map->capacity);
+  long originalIndex = posicion;
 
-  while(map->buckets[posicion] != NULL)
+  while (map->buckets[posicion] != NULL)
   {
-    if(strcmp(map->buckets[posicion]->key, key) == 0)
+    if (strcmp(map->buckets[posicion]->key, key) == 0) 
     {
       map->current = posicion;
-      return map->buckets[posicion]; 
+      return map->buckets[posicion];
     }
     posicion = (posicion + 1) % map->capacity;
+    if (posicion == originalIndex) 
+    {
+            // Se ha recorrido todo el mapa sin encontrar la clave
+      return NULL;
+    }
+    
   }
-  
-  return NULL;
+
+    return NULL;
 }
 
 /*
