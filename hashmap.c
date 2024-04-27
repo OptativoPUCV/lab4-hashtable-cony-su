@@ -204,9 +204,10 @@ Pair * firstMap(HashMap * map)
 Pair * nextMap(HashMap * map) 
 {
   if(map->size == 0) return NULL;
+  
   int posicion = (map->current + 1);
   
-  while(posicion < map->capacity)
+  while(posicion !=  map->current)
   {
     if(map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL)
     {
