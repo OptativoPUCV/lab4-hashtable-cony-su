@@ -54,36 +54,37 @@ c - Ingrese el par en la casilla que encontró.
 No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actualizar la variable size.
 */
 
-void insertMap(HashMap *map, char *key, void *value) {
+void insertMap(HashMap *map, char *key, void *value) 
+{
     long posicion = hash(key, map->capacity);
     long originalIndex = posicion;
 
-    while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) {
-        if (strcmp(map->buckets[posicion]->key, key) == 0) {
-            // Clave repetida, actualizar el valor
-            map->buckets[posicion]->value = value;
-            map->current = posicion;
-            return;
+    while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
+    {
+        if (strcmp(map->buckets[posicion]->key, key) == 0) 
+        {
+          map->buckets[posicion]->value = value;
+          map->current = posicion;
+          return;
         }
+      
         posicion = (posicion + 1) % map->capacity;
-        if (posicion == originalIndex) {
-            // El mapa está lleno, no se puede insertar
-            return;
-        }
+        if (posicion == originalIndex) return;
     }
 
-    // Insertar el nuevo par en la casilla encontrada
-    if (map->buckets[posicion] == NULL) {
-        Pair *nuevo_elem = createPair(key, value);
-        map->buckets[posicion] = nuevo_elem;
-        map->size++;
-        map->current = posicion;
-    } else {
-        // La casilla está ocupada por un par inválido (key == NULL)
-        Pair *nuevo_elem = createPair(key, value);
-        map->buckets[posicion] = nuevo_elem;
-        map->size++;
-        map->current = posicion;
+    if (map->buckets[posicion] == NULL) 
+    {
+      Pair *nuevo_elem = createPair(key, value);
+      map->buckets[posicion] = nuevo_elem;
+      map->size++;
+      map->current = posicion;
+    } 
+    else 
+    {
+      Pair *nuevo_elem = createPair(key, value);
+      map->buckets[posicion] = nuevo_elem;
+      map->size++;
+      map->current = posicion;
     }
 }
 
