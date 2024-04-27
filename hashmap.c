@@ -102,22 +102,8 @@ e - Inserte los elementos del arreglo old_buckets en el mapa (use la función in
 
 void enlarge(HashMap *map) 
 {
-    //enlarge_called = 1; //no borrar (testing purposes)
-  Pair **old_buckets = map->buckets;
-  long old_capacity = map->capacity;
-  map->capacity *= 2;
-  map->buckets = (Pair **)calloc(map->capacity, sizeof(Pair *));
-  map->size = 0;
-
-  for (long i = 0; i < old_capacity; i++)
-  {
-    if (old_buckets[i] != NULL && old_buckets[i]->key != NULL) 
-    {
-      insertMap(map, old_buckets[i]->key, old_buckets[i]->value);
-    }
-  }
-
-  free(old_buckets);
+  enlarge_called = 1; //no borrar (testing purposes)
+ 
 }
 
 //Esta función crea una variable de tipo HashMap, inicializa el arreglo de buckets con casillas nulas, inicializa el resto de variables y retorna el mapa. Inicialice el índice current a -1.
