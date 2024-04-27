@@ -498,3 +498,18 @@ hashmap.c:124:2: error: expected identifier or ‘(’ before ‘/’ token
 cc1: all warnings being treated as errors
 Compilation failed
 7152415
+Sat 27 Apr 2024 04:44:04 AM UTC: 
+ hashmap.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘insertMap’:
+hashmap.c:61:8: error: unused variable ‘pos’ [-Werror=unused-variable]
+   61 |   long pos = posicion;
+      |        ^~~
+hashmap.c: At top level:
+hashmap.c:124:2: error: expected identifier or ‘(’ before ‘/’ token
+  124 | */
+      |  ^
+cc1: all warnings being treated as errors
+Compilation failed
+a3edc73
