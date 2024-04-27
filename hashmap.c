@@ -53,34 +53,33 @@ c - Ingrese el par en la casilla que encontró.
 
 No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actualizar la variable size.
 */
-long resolveCollision(HashMap* hashMap, long position) 
+
+/void insertMap(HashMap * map, char * key, void * value) 
 {
-    // Incrementamos la posición hasta encontrar una casilla vacía
-    while (hashMap->buckets[position] != NULL && hashMap->buckets[position]->key != NULL) 
+  long posicion = hash(key, map->capacity);
+  long pos = posicion;
+
+  while(posicion < map->capacity)
+  {
+    if(map->buckets[posicion] == NULL && map->buckets[posicion]->key != NULL)
     {
-        position = (position + 1) % hashMap->capacity;
+      Pair * nuevo_elem = createPair(key, value);
+      map->buckets[posicion] = nuevo_elem;
+     // map->current = posicion;
+      map->size++;
+      return;
     }
 
-    return position;
-}
-
-
-void insertMap(HashMap * map, char * key, void * value) 
-{
-  long position = hash(key, map->capacity); 
-
-  if (map->buckets[position] == NULL || map->buckets[position]->key == NULL) 
-  {
-    Pair* newPair = createPair(key, value);
-    map->buckets[position] = newPair;
-  } 
-
-  else 
-  {
-    long newPosition = resolveCollision(map, position);
-    Pair* newPair = createPair(key, value);
-    map->buckets[newPosition] = newPair;
+    if(strcmp(map->buckets[posicion]->key, key) == 0)
+    {
+      map->buckets[posicion]->value = value;
+      return;
+    }
+    posicion = (posicion + 1) % map->capacity;
   }
+
+  return;
+
 }
 
 

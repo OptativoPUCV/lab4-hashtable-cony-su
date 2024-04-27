@@ -595,3 +595,12 @@ Sat 27 Apr 2024 05:04:12 AM UTC:
  tests:  12|2
 total_score: 40/70
 d26d843
+Sat 27 Apr 2024 05:05:20 AM UTC: 
+ hashmap.c | 39 +++++++++++++++++++--------------------
+ 1 file changed, 19 insertions(+), 20 deletions(-)
+In file included from test.c:4:
+hashmap.c:57:1: error: expected identifier or ‘(’ before ‘/’ token
+   57 | /void insertMap(HashMap * map, char * key, void * value)
+      | ^
+Compilation failed
+9298b09
