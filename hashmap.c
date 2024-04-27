@@ -205,7 +205,7 @@ Pair * nextMap(HashMap * map)
 {
   if(map->size == 0) return NULL;
   
-  int posicion = (map->current + 1);
+  long posicion = (map->current + 1);
   
   while(posicion !=  map->current)
   {
