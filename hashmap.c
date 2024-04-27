@@ -217,24 +217,21 @@ Pair * firstMap(HashMap * map)
   return NULL;
 }
 
-Pair * nextMap(HashMap * map) 
+
+
+Pair * nextMap(HashMap * map)
 {
-  if (map->size == 0) {
-    map->current = -1;
+  if (map == NULL)
     return NULL;
+
+  for (long i = (map->current + 1); i < map->capacity; i++)
+  {
+    if (map->buckets[i] != NULL)
+    {
+      map->current = i;
+      return map->buckets[i];
+    }
   }
 
-  long posicion = (map->current + 1);
-
-  while(posicion < map->capacity)
-  {
-  if(map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL)
-  {
-    map->current = posicion;
-    return map->buckets[posicion];
-  }
-  posicion = (posicion + 1) % map->capacity;
-  }
-  map->current = -1;
   return NULL;
 }
