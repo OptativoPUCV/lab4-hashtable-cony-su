@@ -211,16 +211,16 @@ Pair *firstMap(HashMap *map)
   return NULL;
 }
 
-
 Pair *nextMap(HashMap *map) 
 {
     if (map == NULL) {
         return NULL;
     }
 
-    long posicion = (map->current + 1) % map->capacity;
+    long start = (map->current + 1) % map->capacity;
+    long posicion = start;
 
-    for (long i = 0; i < map->capacity; i++) 
+    do 
     {
         if (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
         {
@@ -228,7 +228,7 @@ Pair *nextMap(HashMap *map)
             return map->buckets[posicion];
         }
         posicion = (posicion + 1) % map->capacity;
-    }
+    } while (posicion != start);
 
     // Si se recorrió todo el mapa y no se encontró ningún par válido, devolvemos NULL
     map->current = -1;
