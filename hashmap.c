@@ -56,7 +56,7 @@ No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actua
 long resolveCollision(HashMap* hashMap, long position) 
 {
     // Incrementamos la posición hasta encontrar una casilla vacía
-    while (hashMap->buckets[position] != NULL && hashMap->buckets[position]->key != -1) 
+    while (hashMap->buckets[position] != NULL && hashMap->buckets[position]->key != NULL) 
     {
         position = (position + 1) % hashMap->capacity;
     }
