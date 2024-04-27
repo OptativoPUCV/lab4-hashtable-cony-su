@@ -190,3 +190,26 @@ In file included from test.c:2:
       |              ^~~~~~
 Compilation failed
 b4b88f2
+Sat 27 Apr 2024 01:45:53 AM UTC: 
+ hashmap.c | 2 ++
+ 1 file changed, 2 insertions(+)
+In file included from test.c:4:
+hashmap.c: In function ‘insertMap’:
+hashmap.c:80:10: error: ‘return’ with a value, in function returning void [-Werror=return-type]
+   80 |   return NULL;
+      |          ^~~~
+hashmap.c:58:6: note: declared here
+   58 | void insertMap(HashMap * map, char * key, void * value)
+      |      ^~~~~~~~~
+In file included from test.c:4:
+hashmap.c: In function ‘enlarge’:
+hashmap.c:106:27: error: too few arguments to function ‘calloc’
+  106 |   map->buckets = (Pair**) calloc(sizeof(Pair*) * map->capacity);
+      |                           ^~~~~~
+In file included from test.c:2:
+/nix/store/4pqv2mwdn88h7xvsm7a5zplrd8sxzvw0-glibc-2.35-163-dev/include/stdlib.h:543:14: note: declared here
+  543 | extern void *calloc (size_t __nmemb, size_t __size)
+      |              ^~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+74d6245

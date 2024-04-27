@@ -76,6 +76,8 @@ void insertMap(HashMap * map, char * key, void * value)
     }
     posicion = (posicion + 1) % map->capacity;
   }
+  map->current = -1;
+  return NULL;
 
 }
 
@@ -100,6 +102,7 @@ void enlarge(HashMap * map)
     //enlarge_called = 1; //no borrar (testing purposes)
   Pair** old_buckets = map->buckets;
   map->capacity = map->capacity * 2;
+  
   map->buckets = (Pair**) calloc(sizeof(Pair*) * map->capacity);
   map->size = 0;
   for(int k = 0; k < map->capacity; k++)
