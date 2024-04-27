@@ -137,3 +137,28 @@ hashmap.c:101:10: error: unused variable ‘old_buckets’ [-Werror=unused-varia
 cc1: all warnings being treated as errors
 Compilation failed
 fd154b9
+Sat 27 Apr 2024 01:32:18 AM UTC: 
+ hashmap.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+In file included from test.c:4:
+hashmap.c: In function ‘enlarge’:
+hashmap.c:105:13: error: passing argument 1 of ‘insertMap’ from incompatible pointer type [-Werror=incompatible-pointer-types]
+  105 |   insertMap(old_buckets);
+      |             ^~~~~~~~~~~
+      |             |
+      |             Pair **
+In file included from test.c:4:
+hashmap.c:58:26: note: expected ‘HashMap *’ {aka ‘struct HashMap *’} but argument is of type ‘Pair **’
+   58 | void insertMap(HashMap * map, char * key, void * value)
+      |                ~~~~~~~~~~^~~
+In file included from test.c:4:
+hashmap.c:105:3: error: too few arguments to function ‘insertMap’
+  105 |   insertMap(old_buckets);
+      |   ^~~~~~~~~
+In file included from test.c:4:
+hashmap.c:58:6: note: declared here
+   58 | void insertMap(HashMap * map, char * key, void * value)
+      |      ^~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+c0c929b
