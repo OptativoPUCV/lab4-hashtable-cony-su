@@ -108,3 +108,9 @@ Thu 25 Apr 2024 10:16:36 PM UTC:
  tests:  12|3
 total_score: 40/70
 5176c7b
+Sat 27 Apr 2024 01:16:41 AM UTC: 
+ hashmap.c | 28 +++++++++++++++++++++++++++-
+ 1 file changed, 27 insertions(+), 1 deletion(-)
+ tests:  15|2
+total_score: 50/70
+bf32108

@@ -52,7 +52,7 @@ b - Si la casilla se encuentra ocupada, avance hasta una casilla disponible (mé
 c - Ingrese el par en la casilla que encontró.
 
 No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actualizar la variable size.
-*/
+
 
 void insertMap(HashMap * map, char * key, void * value) 
 {
@@ -85,7 +85,33 @@ void insertMap(HashMap * map, char * key, void * value)
     
   }
   
+}*/
+
+
+void insertMap(HashMap * map, char * key, void * value) 
+{
+  int posicion = hash(key, map->capacity);
+
+  while(posicion < map->capacity)
+  {
+    if(map->buckets[posicion] == NULL || map->buckets[posicion]->key == 0)
+    {
+      Pair * nuevo_elem = createPair(key, value);
+      map->buckets[posicion] = nuevo_elem;
+      map->size++;
+      return;
+    }
+
+    if(strcmp(map->buckets[posicion]->key, key) == 0)
+    {
+      map->buckets[posicion]->value = value;
+      return;
+    }
+    posicion = (posicion + 1) % map->capacity;
+  }
+
 }
+
 
 void enlarge(HashMap * map) 
 {
