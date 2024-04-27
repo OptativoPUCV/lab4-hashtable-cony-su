@@ -578,3 +578,14 @@ hashmap.c:60:8: error: unused variable ‘pos’ [-Werror=unused-variable]
 cc1: all warnings being treated as errors
 Compilation failed
 39e47f4
+Sat 27 Apr 2024 05:04:01 AM UTC: 
+ hashmap.c | 38 +++++++++++++++++++-------------------
+ 1 file changed, 19 insertions(+), 19 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘resolveCollision’:
+hashmap.c:59:82: error: comparison between pointer and integer [-Werror]
+   59 |     while (hashMap->buckets[position] != NULL && hashMap->buckets[position]->key != -1)
+      |                                                                                  ^~
+cc1: all warnings being treated as errors
+Compilation failed
+72e57ba
