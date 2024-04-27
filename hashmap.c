@@ -209,6 +209,9 @@ Pair *firstMap(HashMap *map)
 
 
 
+
+
+
 Pair * nextMap(HashMap * map) 
 {
   if (map == NULL) 
@@ -226,7 +229,7 @@ Pair * nextMap(HashMap * map)
     map->current = posicion;
     return map->buckets[posicion];
   }
-  posicion = (posicion + 1) % map->capacity;
+  posicion = (posicion + 1);
   }
   map->current = -1;
   return NULL;
