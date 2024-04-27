@@ -211,7 +211,6 @@ Pair *firstMap(HashMap *map)
   return NULL;
 }
 
-
 Pair *nextMap(HashMap *map) 
 {
   if (map->size == 0) {
@@ -222,13 +221,13 @@ Pair *nextMap(HashMap *map)
   long startPosition = (map->current + 1) % map->capacity;
   long currentPosition = startPosition;
 
-  do {
+  while (currentPosition != map->current) {
     if (map->buckets[currentPosition] != NULL && map->buckets[currentPosition]->key != NULL) {
       map->current = currentPosition;
       return map->buckets[currentPosition];
     }
     currentPosition = (currentPosition + 1) % map->capacity;
-  } while (currentPosition != startPosition);
+  }
 
   // Si llegamos aquí, no se encontró ningún elemento válido después del índice actual
   map->current = -1;
