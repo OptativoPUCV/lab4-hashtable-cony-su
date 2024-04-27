@@ -68,7 +68,7 @@ void insertMap(HashMap *map, char *key, void *value)
         if (strcmp(map->buckets[posicion]->key, key) == 0) 
         {
             map->buckets[posicion]->value = value;
-            map->current = posicion;
+           // map->current = posicion;
             return;
         }
 
