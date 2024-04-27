@@ -121,7 +121,7 @@ void enlarge(HashMap * map)
   }
   free(old_buckets);
 }
-*/
+
 
 void enlarge(HashMap *map) 
 {

@@ -513,3 +513,21 @@ hashmap.c:124:2: error: expected identifier or ‘(’ before ‘/’ token
 cc1: all warnings being treated as errors
 Compilation failed
 a3edc73
+Sat 27 Apr 2024 04:44:19 AM UTC: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+In file included from test.c:4:
+hashmap.c: In function ‘insertMap’:
+hashmap.c:61:8: error: unused variable ‘pos’ [-Werror=unused-variable]
+   61 |   long pos = posicion;
+      |        ^~~
+hashmap.c: At top level:
+hashmap.c:126:6: error: redefinition of ‘enlarge’
+  126 | void enlarge(HashMap *map)
+      |      ^~~~~~~
+hashmap.c:105:6: note: previous definition of ‘enlarge’ with type ‘void(HashMap *)’ {aka ‘void(struct HashMap *)’}
+  105 | void enlarge(HashMap * map)
+      |      ^~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+5a43c82
