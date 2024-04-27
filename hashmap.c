@@ -54,7 +54,7 @@ c - Ingrese el par en la casilla que encontró.
 No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actualizar la variable size.
 */
 
-/void insertMap(HashMap * map, char * key, void * value) 
+void insertMap(HashMap * map, char * key, void * value) 
 {
   long posicion = hash(key, map->capacity);
   long pos = posicion;
