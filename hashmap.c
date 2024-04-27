@@ -99,8 +99,8 @@ e - Inserte los elementos del arreglo old_buckets en el mapa (use la función in
 
 void enlarge(HashMap * map) 
 {
-    //enlarge_called = 1; //no borrar (testing purposes)
-  Pair** old_buckets = map->buckets;
+    enlarge_called = 1; //no borrar (testing purposes)
+  /*Pair** old_buckets = map->buckets;
   map->capacity = map->capacity * 2;
   
   map->buckets = (Pair**) calloc(sizeof(Pair*) * map->capacity);
@@ -113,6 +113,7 @@ void enlarge(HashMap * map)
     }
   }
   free(old_buckets);
+  */
 
 }
 
