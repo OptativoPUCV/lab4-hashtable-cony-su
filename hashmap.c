@@ -73,15 +73,12 @@ void insertMap(HashMap *map, char *key, void *value)
         }
 
         posicion = (posicion + 1) % map->capacity;
-        if (posicion == originalIndex) {
-            return; // Evitar bucle infinito si el mapa está lleno
-        }
+        if (posicion == originalIndex) return; 
+        
     }
 
     Pair *new_pair = createPair(key, value);
-    if (new_pair == NULL) {
-        return; // No se pudo crear el nuevo par
-    }
+    if (new_pair == NULL) return; 
 
     map->buckets[posicion] = new_pair;
     map->size++;
