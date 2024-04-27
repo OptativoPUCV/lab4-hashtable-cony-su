@@ -65,6 +65,7 @@ void insertMap(HashMap * map, char * key, void * value)
     {
       Pair * nuevo_elem = createPair(key, value);
       map->buckets[posicion] = nuevo_elem;
+      map->current = posicion;
       map->size++;
       return;
     }
