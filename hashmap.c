@@ -54,35 +54,47 @@ c - Ingrese el par en la casilla que encontró.
 No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actualizar la variable size.
 */
 
-void insertMap(HashMap *map, char *key, void *value) 
+
+void insertMap(HashMap * map, char * key, void * value)
 {
-    if (map == NULL || key == NULL) {
-        return;
-    }
+  if (map == NULL || key == NULL)
+    return;
 
-    long posicion = hash(key, map->capacity);
-    long originalIndex = posicion;
+  /*if ((map->size + 1) >= (map->capacity * 0.7))
+    enlarge(map);*/
 
-    while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
+  long posicion = hash(key, map->capacity);
+  Pair * pair = searchMap(map, key);
+
+  if (pair == NULL)
+  {
+    while (posicion < map->capacity)
     {
-        if (strcmp(map->buckets[posicion]->key, key) == 0) 
-        {
-            map->buckets[posicion]->value = value;
-           // map->current = posicion;
-            return;
-        }
-
-        posicion = (posicion + 1) % map->capacity;
-        if (posicion == originalIndex) return; 
-        
+      if (map->buckets[posicion] == NULL)
+      {
+        map->buckets[posicion] = createPair(key, value);
+        map->current = posicion;
+        map->size = map->size + 1;
+        return;
+      }
+      posicion = (posicion + 1) % map->capacity;
     }
+  }
 
-    Pair *new_pair = createPair(key, value);
-    if (new_pair == NULL) return; 
+  else
+  {
+    pair->value = value;
 
-    map->buckets[posicion] = new_pair;
-    map->size++;
-  //  map->current = posicion;
+    while (posicion < map->capacity)
+    {
+      if (is_equal(pair->key, key) == 1)
+        break;
+
+      posicion = (posicion + 1) % map->capacity;
+    }
+    map->current = posicion;
+    return;
+  }
 }
 
 
