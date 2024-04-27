@@ -211,24 +211,26 @@ Pair *firstMap(HashMap *map)
   return NULL;
 }
 
-Pair * nextMap(HashMap * map) 
+
+Pair *nextMap(HashMap *map) 
 {
   if (map->size == 0) {
     map->current = -1;
     return NULL;
   }
 
-  long posicion = (map->current + 1);
+  long startPosition = (map->current + 1) % map->capacity;
+  long currentPosition = startPosition;
 
-  while(posicion < map->capacity)
-  {
-  if(map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL)
-  {
-    map->current = posicion;
-    return map->buckets[posicion];
-  }
-  posicion = (posicion + 1) % map->capacity;
-  }
+  do {
+    if (map->buckets[currentPosition] != NULL && map->buckets[currentPosition]->key != NULL) {
+      map->current = currentPosition;
+      return map->buckets[currentPosition];
+    }
+    currentPosition = (currentPosition + 1) % map->capacity;
+  } while (currentPosition != startPosition);
+
+  // Si llegamos aquí, no se encontró ningún elemento válido después del índice actual
   map->current = -1;
   return NULL;
 }
