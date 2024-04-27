@@ -54,38 +54,28 @@ c - Ingrese el par en la casilla que encontró.
 No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actualizar la variable size.
 */
 
-void insertMap(HashMap *map, char *key, void *value) 
+
+Pair *nextMap(HashMap *map) 
 {
-    if (map == NULL || key == NULL) {
-        return;
+    if (map == NULL) {
+        return NULL;
     }
 
-    long posicion = hash(key, map->capacity);
-    long originalIndex = posicion;
+    long posicion = (map->current + 1) % map->capacity;
 
-    while (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
+    for (long i = 0; i < map->capacity; i++) 
     {
-        if (strcmp(map->buckets[posicion]->key, key) == 0) 
+        if (map->buckets[posicion] != NULL && map->buckets[posicion]->key != NULL) 
         {
-            map->buckets[posicion]->value = value;
             map->current = posicion;
-            return;
+            return map->buckets[posicion];
         }
-
         posicion = (posicion + 1) % map->capacity;
-        if (posicion == originalIndex) {
-            return; // Evitar bucle infinito si el mapa está lleno
-        }
     }
 
-    Pair *new_pair = createPair(key, value);
-    if (new_pair == NULL) {
-        return; // No se pudo crear el nuevo par
-    }
-
-    map->buckets[posicion] = new_pair;
-    map->size++;
-    map->current = posicion;
+    // Si se recorrió todo el mapa y no se encontró ningún par válido, devolvemos NULL
+    map->current = -1;
+    return NULL;
 }
 
 
