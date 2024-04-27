@@ -176,3 +176,17 @@ In file included from test.c:2:
       |              ^~~~~~
 Compilation failed
 790be5c
+Sat 27 Apr 2024 01:41:50 AM UTC: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+In file included from test.c:4:
+hashmap.c: In function ‘enlarge’:
+hashmap.c:103:27: error: too few arguments to function ‘calloc’
+  103 |   map->buckets = (Pair**) calloc(sizeof(Pair*) * map->capacity);
+      |                           ^~~~~~
+In file included from test.c:2:
+/nix/store/4pqv2mwdn88h7xvsm7a5zplrd8sxzvw0-glibc-2.35-163-dev/include/stdlib.h:543:14: note: declared here
+  543 | extern void *calloc (size_t __nmemb, size_t __size)
+      |              ^~~~~~
+Compilation failed
+b4b88f2
