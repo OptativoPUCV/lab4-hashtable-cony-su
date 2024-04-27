@@ -119,6 +119,7 @@ void enlarge(HashMap *map)
   free(old_buckets);
 }
 
+
 //Esta función crea una variable de tipo HashMap, inicializa el arreglo de buckets con casillas nulas, inicializa el resto de variables y retorna el mapa. Inicialice el índice current a -1.
 HashMap * createMap(long capacity)
 {
@@ -126,10 +127,11 @@ HashMap * createMap(long capacity)
 
   //el calloc inicializa en 0, por lo que no debo inicializar manualmente en null, CREO
   map->buckets = (Pair **)calloc(capacity, sizeof(Pair *));
-
+  
   map->size = 0;
   map->capacity = capacity;
   map->current = -1;
+  
   return map;
 }
 
@@ -144,7 +146,7 @@ void eraseMap(HashMap * map,  char * key)
   {
     if(strcmp(map->buckets[posicion]->key, key) == 0)
     {
-      //free(map->buckets[posicion]->key);
+      free(map->buckets[posicion]->key);
       map->buckets[posicion]->key = NULL;
       map->size--;
       return;
