@@ -57,7 +57,7 @@ No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actua
 
 void insertMap(HashMap * map, char * key, void * value) 
 {
-  int posicion = hash(key, map->capacity);
+  long posicion = hash(key, map->capacity);
 
   while(posicion < map->capacity)
   {
@@ -101,13 +101,15 @@ void enlarge(HashMap * map)
 {
     //enlarge_called = 1; //no borrar (testing purposes)
   Pair** old_buckets = map->buckets;
+  long cap_anterior = map->capacity;
   map->capacity = map->capacity * 2;
-  
-  map->buckets = (Pair**) calloc(sizeof(Pair*) * map->capacity);
   map->size = 0;
-  for(int k = 0; k < map->capacity; k++)
+  
+  map->buckets = (Pair **) calloc(map->capacity, sizeof(Pair *));
+  
+  for(long k = 0; k < cap_anterior; k++)
   {
-    if(old_buckets[k] != NULL)
+    if(old_buckets[k] != NULL && old_buckets[k]->key != NULL)
     {
       insertMap(map, old_buckets[k]->key, old_buckets[k]->value);
     }
@@ -136,7 +138,7 @@ HashMap * createMap(long capacity)
 
 void eraseMap(HashMap * map,  char * key) 
 {    
-  int posicion = hash(key, map->capacity);
+  long posicion = hash(key, map->capacity);
 
   while(map->buckets[posicion] != NULL)
   {
@@ -166,7 +168,7 @@ Recuerde actualizar el índice current a la posición encontrada. Recuerde que e
 
 Pair * searchMap(HashMap * map,  char * key) 
 {   
-  int posicion = hash(key, map->capacity);
+  long posicion = hash(key, map->capacity);
 
   while(map->buckets[posicion] != NULL)
   {
